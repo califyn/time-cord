@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="time-cord",
-    version="0.0.1",
+    version="0.0.1.dev1",
     author="Ali Yang",
     author_email="califynic@gmail.com",
     description="A Python library for time management tools for Discord",

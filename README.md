@@ -3,11 +3,16 @@
 Current features:
 - None
 
-Features in development:
-Functions that can:
+(In development) Functions that can:
 - Track time spent on Discord
 - Track time spent on specific servers & channels
 - Close Discord after too much time is spent
+...without violating Discord ToS!
 
 Areas for improvement:
 - Support for non-Mac OS devices
+
+Dependencies:
+- None
+
+Install using ``pip install time-cord``
