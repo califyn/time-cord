@@ -3,8 +3,8 @@ import time
 
 time.sleep(3)
 
-# Returns name & title of the focused window in the format "name, title".
 def return_top():
+    """return name & title of the focused window in the format "name, title"."""
     frontapp = '''
         global frontApp, frontAppName, windowTitle
 
@@ -29,8 +29,8 @@ def return_top():
 # Albert's answer, https://stackoverflow.com/questions/5292204/macosx-get-foremost-window-title
 # RobC's answer, https://stackoverflow.com/questions/51775132/how-to-get-return-value-from-applescript-in-python
 
-# Returns (TRUE, channel_name) if Discord is open, else returns (False, None).
 def is_open():
+    """returns (True, channel_name) if Discord is open, else returns (False, None)."""
     top = return_top()
     if top[0:8] == "Discord,":
         hash = top.index("#")
