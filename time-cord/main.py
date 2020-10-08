@@ -3,8 +3,14 @@ import time
 
 time.sleep(3)
 
-def return_top():
-    """return name & title of the focused window in the format "name, title"."""
+def get_top_window():
+    """Return name and title of the focused window in MacOSX. 
+    
+    Code adapted from: Albert's answer (https://stackoverflow.com/questions/5292204/macosx-get-foremost-window-title) and RobC's answer (https://stackoverflow.com/questions/51775132/how-to-get-return-value-from-applescript-in-python)
+    
+    Returns:
+    str: "name, title"
+    """
     frontapp = '''
         global frontApp, frontAppName, windowTitle
 
@@ -25,13 +31,15 @@ def return_top():
     proc = Popen(['osascript', '-'], stdin=PIPE, stdout=PIPE, stderr=PIPE, universal_newlines=True)
     front, error = proc.communicate(frontapp)
     return front
-# Code credits:
-# Albert's answer, https://stackoverflow.com/questions/5292204/macosx-get-foremost-window-title
-# RobC's answer, https://stackoverflow.com/questions/51775132/how-to-get-return-value-from-applescript-in-python
 
 def is_open():
-    """returns (True, channel_name) if Discord is open, else returns (False, None)."""
-    top = return_top()
+    """Determine if Discord is open in the top window
+
+    Returns:
+    boolean: Whether Discord is open
+    str: channel_name if Discord is open, else None
+    """
+    top = get_top_window()
     if top[0:8] == "Discord,":
         hash = top.index("#")
         top = top[hash + 1:]
@@ -41,7 +49,7 @@ def is_open():
     else:
         return False, None
 
-# TODO: a function which can find the server name in Discord (return_top has the ability to find the channel name.)
+# TODO: a function which can find the server name in Discord (get_top_window has the ability to find the channel name.)
 
-print(return_top())
+print(get_top_window())
 print(is_open())
