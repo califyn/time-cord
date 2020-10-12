@@ -1,45 +1,67 @@
 from subprocess import Popen, PIPE
-import time
+import time, platform
+
+if platform.system() == "Windows"
+    """
+    Windows-only imports; these will fail on MacOS
+    """
+    import win32process
+    import wmi
+    import win32gui
 
 time.sleep(3)
 
-def get_top_window():
-    """Return name and title of the focused window in MacOSX. 
+class UnsupportedOSError(Exception):
+    """
+    Handles the case of users running on Windows/Linux.
+    """
+
+def return_top():
+    """
+    Return name and title of the focused window in string format in supported OSes. 
     
-    Code adapted from: Albert's answer (https://stackoverflow.com/questions/5292204/macosx-get-foremost-window-title) and RobC's answer (https://stackoverflow.com/questions/51775132/how-to-get-return-value-from-applescript-in-python)
+    Code adapted from: Albert's answer (https://stackoverflow.com/questions/5292204/macosx-get-foremost-window-title)
+        and RobC's answer (https://stackoverflow.com/questions/51775132/how-to-get-return-value-from-applescript-in-python)
     
     Returns:
-    str: "name, title"
+      str: "name, title"
     """
-    frontapp = '''
-        global frontApp, frontAppName, windowTitle
 
-        set windowTitle to ""
-        tell application "System Events"
-            set frontApp to first application process whose frontmost is true
-            set frontAppName to name of frontApp
-            tell process frontAppName
-                tell (1st window whose value of attribute "AXMain" is true)
-                    set windowTitle to value of attribute "AXTitle"
+    if platform.system() == "Darwin":
+        frontapp = '''
+            global frontApp, frontAppName, windowTitle
+            set windowTitle to ""
+            tell application "System Events"
+                set frontApp to first application process whose frontmost is true
+                set frontAppName to name of frontApp
+                tell process frontAppName
+                    tell (1st window whose value of attribute "AXMain" is true)
+                        set windowTitle to value of attribute "AXTitle"
+                    end tell
                 end tell
             end tell
-        end tell
+            return {frontAppName, windowTitle}
+          '''
 
-        return {frontAppName, windowTitle}
-      '''
+        proc = Popen(['osascript', '-'], stdin=PIPE, stdout=PIPE, stderr=PIPE, universal_newlines=True)
+        front, error = proc.communicate(frontapp)
+        return front
 
-    proc = Popen(['osascript', '-'], stdin=PIPE, stdout=PIPE, stderr=PIPE, universal_newlines=True)
-    front, error = proc.communicate(frontapp)
-    return front
+    elif platform.system() == "Windows":
+        front = psutil.Process(win32process.GetWindowThreadProcessId(win32gui.GetForegroundWindow())[-1]).name()
+
+    else:
+        raise UnsupportedOSError(platform.system() + " is not supported by this version of time-cord.")
 
 def is_open():
-    """Determine if Discord is open in the top window
-
-    Returns:
-    boolean: Whether Discord is open
-    str: channel_name if Discord is open, else None
     """
-    top = get_top_window()
+    Determine if Discord is open in the top window, and return current channel name if so.
+    
+    Returns:
+      boolean: Whether Discord is open
+      str: channel_name if Discord is open, else None
+    """
+    top = return_top()
     if top[0:8] == "Discord,":
         hash = top.index("#")
         top = top[hash + 1:]
@@ -49,7 +71,7 @@ def is_open():
     else:
         return False, None
 
-# TODO: a function which can find the server name in Discord (get_top_window has the ability to find the channel name.)
+# TODO: a function which can find the server name in Discord (return_top has the ability to find the channel name.)
 
-print(get_top_window())
+print(return_top())
 print(is_open())
