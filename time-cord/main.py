@@ -2,9 +2,9 @@ from subprocess import Popen, PIPE
 import time, platform
 
 if platform.system() == "Windows"
-    # -------------------------------------- #
-    # Windows-only imports; these will fail on MacOS
-    # -------------------------------------- #
+    """
+    Windows-only imports; these will fail on MacOS
+    """
     import win32process
     import wmi
     import win32gui
@@ -16,16 +16,20 @@ class UnsupportedOSError(Exception):
     Handles the case of users running on Windows/Linux.
     """
 
-# Returns name & title of the focused window in the format "name, title".
 def return_top():
-    # -------------------------------------- #
-    # Executes a script to determine which application is focused.
-    # -------------------------------------- #
+    """
+    Return name and title of the focused window in string format in supported OSes. 
+    
+    Code adapted from: Albert's answer (https://stackoverflow.com/questions/5292204/macosx-get-foremost-window-title)
+        and RobC's answer (https://stackoverflow.com/questions/51775132/how-to-get-return-value-from-applescript-in-python)
+    
+    Returns:
+      str: "name, title"
+    """
 
     if platform.system() == "Darwin":
         frontapp = '''
             global frontApp, frontAppName, windowTitle
-
             set windowTitle to ""
             tell application "System Events"
                 set frontApp to first application process whose frontmost is true
@@ -36,7 +40,6 @@ def return_top():
                     end tell
                 end tell
             end tell
-
             return {frontAppName, windowTitle}
           '''
 
@@ -49,12 +52,15 @@ def return_top():
 
     else:
         raise UnsupportedOSError(platform.system() + " is not supported by this version of time-cord.")
-# Code credits:
-# Albert's answer, https://stackoverflow.com/questions/5292204/macosx-get-foremost-window-title
-# RobC's answer, https://stackoverflow.com/questions/51775132/how-to-get-return-value-from-applescript-in-python
 
-# Returns (TRUE, channel_name) if Discord is open, else returns (False, None).
 def is_open():
+    """
+    Determine if Discord is open in the top window, and return current channel name if so.
+    
+    Returns:
+      boolean: Whether Discord is open
+      str: channel_name if Discord is open, else None
+    """
     top = return_top()
     if top[0:8] == "Discord,":
         hash = top.index("#")
