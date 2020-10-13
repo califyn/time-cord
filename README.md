@@ -13,14 +13,15 @@ The library is in early development, and there are no current finalized features
 - Support for non-Mac OS devices
 
 #### Dependencies:
-- None
+- Pillow
+- Easyocr
 
 With the rise of Discord as a platform for teams and friend groups alike, it's important to watch your time management on the platform. There are no current apps specifically for discord time management, so this library aims to fill that gap.  
 
 ## Contributing to timecord
 
-If you have suggestions for improving or extending this project, please submit a pull request or issue! 
+If you have suggestions for improving or extending this project, please submit a pull request or issue!
 
 ## Installation
 
-This library can be installed through pip: just type the command  ``pip install time-cord``. 
+This library can be installed through pip: just type the command  ``pip install time-cord``.
