@@ -176,7 +176,6 @@ def server_name():
             return "DMs"
     # Otherwise, get server name
     server = ss.crop((left, top, right, bottom))
-    server.show()
     name = ocr.readtext(numpy.array(server))
     return name[0][1]
 
