@@ -144,9 +144,9 @@ def server_name():
     left = 6
     print(px[6, 0])
     print(list(px[left, 0]))
-    while px[left, 0][0] == 47 and px[left, 0][1] == 49 and px[left, 0][2] == 55:
+    if px[left, 0][0] == 47 and px[left, 0][1] == 49 and px[left, 0][2] == 55:
         return "Settings"
-    while px[left, 0][0] == 242 and px[left, 0][1] == 243 and px[left, 0][2] == 245:
+    if px[left, 0][0] == 242 and px[left, 0][1] == 243 and px[left, 0][2] == 245:
         return "Settings"
     while px[left, 0][0] == 32 and px[left, 0][1] == 34 and px[left, 0][2] == 37:
         left = left + 1
