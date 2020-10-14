@@ -1,7 +1,5 @@
-from subprocess import Popen, PIPE
+from subprocess import Popen, PIPE, TimeoutExpired
 import time
-
-time.sleep(3)
 
 # Returns name & title of the focused window in the format "name, title".
 def return_top():
@@ -23,8 +21,12 @@ def return_top():
       '''
 
     proc = Popen(['osascript', '-'], stdin=PIPE, stdout=PIPE, stderr=PIPE, universal_newlines=True)
-    front, error = proc.communicate(frontapp)
+    try:
+        front, error = proc.communicate(input=frontapp, timeout=15)
+    except TimeoutExpired:
+        proc.kill()
     return front
+
 # Code credits:
 # Albert's answer, https://stackoverflow.com/questions/5292204/macosx-get-foremost-window-title
 # RobC's answer, https://stackoverflow.com/questions/51775132/how-to-get-return-value-from-applescript-in-python
@@ -43,5 +45,7 @@ def is_open():
 
 # TODO: a function which can find the server name in Discord (return_top has the ability to find the channel name.)
 
-print(return_top())
-print(is_open())
+if __name__ == "__main__":
+    time.sleep(3)
+    print(return_top())
+    print(is_open())
