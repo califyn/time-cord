@@ -102,7 +102,6 @@ def get_bounds(process="Discord"):
         sp_arr = bounds[:-1].split(",")
         for i in range(0, len(sp_arr)):
             sp_arr[i] = int(sp_arr[i])
-        print(str(sp_arr))
         coords = [0, 0, 0, 0]
         coords[0] = sp_arr[2]
         coords[1] = sp_arr[3]
