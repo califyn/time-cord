@@ -179,4 +179,4 @@ def server_name():
     name = ocr.readtext(numpy.array(server))
     return name[0][1]
 
-print(process_screenshot())
+print(server_name())
