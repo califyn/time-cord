@@ -7,7 +7,9 @@ timecord is a library-in-development that seeks to:
 - Close Discord after too much time is spent
 ...without violating Discord ToS!
 
-The library is in early development, and there are no current finalized features.
+The library is in early development. Completed features include:
+
+- Functions to determine _current_ server/channel name.
 
 #### Areas for improvement:
 - Support for non-Mac OS devices
