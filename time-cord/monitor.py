@@ -102,7 +102,6 @@ def get_bounds(process="Discord"):
         sp_arr = bounds[:-1].split(",")
         for i in range(0, len(sp_arr)):
             sp_arr[i] = int(sp_arr[i])
-        print(str(sp_arr))
         coords = [0, 0, 0, 0]
         coords[0] = sp_arr[2]
         coords[1] = sp_arr[3]
@@ -142,8 +141,6 @@ def server_name():
     # Get server text area bounding box (using colors)
     px = ss.load()
     left = 6
-    print(px[6, 0])
-    print(list(px[left, 0]))
     if px[left, 0][0] == 47 and px[left, 0][1] == 49 and px[left, 0][2] == 55:
         return "Settings"
     if px[left, 0][0] == 242 and px[left, 0][1] == 243 and px[left, 0][2] == 245:
@@ -167,12 +164,10 @@ def server_name():
         bottom = bottom + 1
     while px[left, bottom][0] == 242 and px[left, bottom][1] == 243 and px[left, bottom][2] == 245:
         bottom = bottom + 1
-    print(str(top) + ", " + str(bottom) + ", " + str(left) + ", " + str(right))
     # Check if we're in DMs
     hmiddle = (left + right) // 2
     for i in range(top + 1, bottom - 1):
         if px[hmiddle, i][0] == 32 or px[hmiddle, i][0] == 227:
-            print(str(i))
             return "DMs"
     # Otherwise, get server name
     server = ss.crop((left, top, right, bottom))
