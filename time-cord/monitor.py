@@ -207,7 +207,3 @@ class Monitor():
         server = ss.crop((left, top, right, bottom))
         name = self.ocr.readtext(numpy.array(server))
         return name[0][1]
-
-monitor = Monitor(debug=False)
-
-print(str(monitor.channel_name()) + ", " + str(monitor.server_name()))
