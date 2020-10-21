@@ -27,7 +27,7 @@ if platform.system() == "Windows":
     import win32process
     import wmi
     import win32gui
-   
+
 class UnsupportedOSError(Exception):
     """
     Handles the case of users running on Windows/Linux.
