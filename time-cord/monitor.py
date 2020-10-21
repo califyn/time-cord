@@ -35,6 +35,7 @@ class UnsupportedOSError(Exception):
 
 class Monitor():
     def __init__(*args, **kwargs):
+        self = args[0]
         self.ocr = easyocr.Reader(['en']) # need to run only once to load model into memory)
         self.debug = False
 
@@ -42,7 +43,7 @@ class Monitor():
             if arg == "debug":
                 self.debug = kwargs[arg]
 
-    def return_top():
+    def return_top(self):
         """
         Return name and title of the focused window in string format in supported OSes.
 
@@ -77,25 +78,25 @@ class Monitor():
         else:
             raise UnsupportedOSError(platform.system() + " is not supported by this version of time-cord.")
 
-    def is_open():
+    def channel_name(self):
         """
         Determine if Discord is open in the top window, and return current channel name if so.
 
         Returns:
-          boolean: Whether Discord is open
           str: channel_name if Discord is open, else None
         """
-        top = return_top()
+
+        top = self.return_top()
         if top[0:8] == "Discord,":
             hash = top.index("#")
             top = top[hash + 1:]
             space = top.index(" ")
             top = top[:space]
-            return True, top
+            return top
         else:
-            return False, None
+            return None
 
-    def get_bounds(process="Discord"):
+    def get_bounds(self, process="Discord"):
         """
         Get the boundaries of a window corresponding to a specified application/process.
         It is necessary said window is visible on the computer desktop.
@@ -141,7 +142,7 @@ class Monitor():
             raise UnsupportedOSError(platform.system() + " is not supported by this version of time-cord.")
 
 
-    def get_screenshot(process="Discord"):
+    def get_screenshot(self, process="Discord"):
         """
         Get a screenshot of a window corresponding to an application/process which is current in the display.
 
@@ -152,17 +153,18 @@ class Monitor():
             Image: a picture of the application.
         """
 
-        ss = ImageGrab.grab(bbox=get_bounds(process))
+        ss = ImageGrab.grab(bbox=self.get_bounds(process))
         return ss
 
-    def server_name():
+    def server_name(self):
         """
         Calculates the server name of the open Discord window.
 
         Outputs:
             str: Name of the server.
         """
-        ss = get_screenshot()
+
+        ss = self.get_screenshot()
         # Get server text area bounding box (using colors)
         px = ss.load()
         left = 6
@@ -208,4 +210,4 @@ class Monitor():
 
 monitor = Monitor(debug=True)
 
-print(monitor.server_name())
+print(monitor.channel_name())
