@@ -27,9 +27,7 @@ if platform.system() == "Windows":
     import win32process
     import wmi
     import win32gui
-
-time.sleep(3)
-
+   
 class UnsupportedOSError(Exception):
     """
     Handles the case of users running on Windows/Linux.
@@ -208,12 +206,6 @@ class Monitor():
         name = self.ocr.readtext(numpy.array(server))
         return name[0][1]
 
-    def process_screenshot():
-        """
-        Not implemented yet.
-        """
-        return "Hello"
-
 monitor = Monitor(debug=True)
 
-print(monitor.process_screenshot())
+print(monitor.server_name())
