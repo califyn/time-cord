@@ -208,6 +208,6 @@ class Monitor():
         name = self.ocr.readtext(numpy.array(server))
         return name[0][1]
 
-monitor = Monitor(debug=True)
+monitor = Monitor(debug=False)
 
-print(monitor.channel_name())
+print(str(monitor.channel_name()) + ", " + str(monitor.server_name()))
