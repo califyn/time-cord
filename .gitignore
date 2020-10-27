@@ -4,3 +4,4 @@ time_cord.egg-info/
 .DS_Store
 */.DS_Store
 */__pycache__
+*log

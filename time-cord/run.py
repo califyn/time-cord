@@ -55,4 +55,3 @@ with ThreadPoolExecutor(max_workers=3) as executor:
     while not time.sleep(sleep_time):
         task = executor.submit(thread_func)
         sleep_time = interval - (time.time() % interval)
-        print(sleep_time)
