@@ -88,7 +88,9 @@ class Monitor():
 
         top = self.return_top()
         if top[0:8] == "Discord,":
-            hash = top.index("#")
+            hash = top.find("#")
+            if hash == -1:
+                hash = top.index("@")
             top = top[hash + 1:]
             space = top.index(" ")
             top = top[:space]
@@ -125,8 +127,6 @@ class Monitor():
             sp_arr = bounds[:-1].split(",")
             for i in range(0, len(sp_arr)):
                 sp_arr[i] = int(sp_arr[i])
-            if self.debug:
-                print(str(sp_arr))
             coords = [0, 0, 0, 0]
             coords[0] = sp_arr[2]
             coords[1] = sp_arr[3]
