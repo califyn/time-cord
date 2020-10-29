@@ -3,3 +3,7 @@ tests/
 time_cord.egg-info/
 .DS_Store
 */.DS_Store
+*/__pycache__
+time-cord/records.log
+*log
+time-cord/tmp/*
