@@ -35,7 +35,7 @@ def rec_write(line, path="records.log"): # TODO: quicker file reading/writing
     except Exception as e:
         print(e)
 
-def thread_func():
+def record():
     try:
         line = str(time.time())
         chnl = mon.channel_name()
@@ -51,8 +51,7 @@ def thread_func():
 
 # TODO: make sure not too many threads are running at once (interval too low)
 # TODO: replace commas
-with ThreadPoolExecutor(max_workers=3) as executor:
-    sleep_time = 0
-    while not time.sleep(sleep_time):
-        task = executor.submit(thread_func)
-        sleep_time = interval - (time.time() % interval)
+sleep_time = 0
+while not time.sleep(sleep_time):
+    record()
+    sleep_time = interval - (time.time() % interval)
