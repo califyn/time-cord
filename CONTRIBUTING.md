@@ -18,7 +18,7 @@ Notice a problem with the code, or want to suggest an enhancement?  Create an is
 
 ### Test your code
 
-Before submitting any PR, please try to test your code a little.  Formal tests aren't allowed, but please do not submit PRs with obvious syntax errors or that have obviously not been run even once.
+Before submitting any PR, please try to test your code a little.  Formal tests aren't required, but please do not submit PRs with obvious syntax errors or that have obviously not been run even once.
 
 Additionally, as much as possible, please try to avoid making PRs that cause merge conflicts.  If the repository has updated since you last pulled, use ``git rebase`` to fix that.
 
