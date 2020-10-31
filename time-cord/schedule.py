@@ -1,34 +1,34 @@
 # schedule using launchd for mac os x NOT CRONTAB
 import platform, os, sys, pwd
 
-pypaths = sys.path # get python path environment
-finals = []
-for p in pypaths:
-    finals.append(p.split("/")[-1])
-ind = -1
-for f in range(len(finals)):
-    if finals[f][0:6] != "python":
-        continue
-    if not finals[f][6:].replace('.','',1).isdigit():
-        continue
-    if ind != -1:
-        raise Exception("Python path parsing failed: too many choices")
-    ind = f
-if ind == -1:
-    raise Exception("Python path parsing failed: no valid python path")
-pypath = sys.path[ind]
-pypath_split = pypath.split("/")
-pypath_split[-2] = "bin"
-pypath = "/".join(pypath_split)
-print(pypath)
-
-path = os.path.realpath(__file__)
-path_split = path.split("/")
-path_split[-1] = ""
-path = "/".join(path_split)
-print(path)
-
 if platform.system() == "Darwin":
+    pypaths = sys.path # get python path environment
+    finals = []
+    for p in pypaths:
+        finals.append(p.split("/")[-1])
+    ind = -1
+    for f in range(len(finals)):
+        if finals[f][0:6] != "python":
+            continue
+        if not finals[f][6:].replace('.','',1).isdigit():
+            continue
+        if ind != -1:
+            raise Exception("Python path parsing failed: too many choices")
+        ind = f
+    if ind == -1:
+        raise Exception("Python path parsing failed: no valid python path")
+    pypath = sys.path[ind]
+    pypath_split = pypath.split("/")
+    pypath_split[-2] = "bin"
+    pypath = "/".join(pypath_split)
+    print(pypath)
+
+    path = os.path.realpath(__file__)
+    path_split = path.split("/")
+    path_split[-1] = ""
+    path = "/".join(path_split)
+    print(path)
+    
     str = """<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
