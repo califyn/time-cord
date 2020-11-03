@@ -17,6 +17,7 @@ The library is in early development.  Completed features include:
 - Pillow
 - Easyocr
 - tendo
+- tzlocal
 
 With the rise of Discord as a platform for teams and friend groups alike, it's important to watch your time management on the platform. There are no current apps specifically for discord time management, so this library aims to fill that gap.  
 
