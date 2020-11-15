@@ -4,6 +4,11 @@ import time
 from monitor import Monitor
 from tendo import singleton
 import os
+from loguru import logger
+logger.add("records.log", retention="10 days")  # Cleanup after some time
+
+def rec_write2(line, path="records.log"): # TODO: quicker file reading/writing
+    logger.info(line)
 
 me = singleton.SingleInstance() # make sure no other instances are running
 
@@ -17,23 +22,6 @@ parpath = "/".join(path_split)
 interval = 30
 # every N seconds, execute something
 
-def rec_write(line, path="records.log"): # TODO: quicker file reading/writing
-    lines = []
-    try:
-        with open(parpath + path, "r") as file:
-            lines = file.readlines()
-            ind = 0
-            for i in range(0,len(lines)):
-                if lines[i].split(",")[0] > line.split(",")[0]:
-                    break
-                else:
-                    ind = i + 1
-            lines.insert(ind, line)
-        with open(parpath + path, "w") as file:
-            for l in lines:
-                file.write(l)
-    except Exception as e:
-        print(e)
 
 def record():
     try:
@@ -49,9 +37,9 @@ def record():
     except Exception as e:
         print(e)
 
-# TODO: make sure not too many threads are running at once (interval too low)
-# TODO: replace commas
-sleep_time = 0
-while not time.sleep(sleep_time):
-    record()
-    sleep_time = interval - (time.time() % interval)
+# # TODO: make sure not too many threads are running at once (interval too low)
+# # TODO: replace commas
+# sleep_time = 0
+# while not time.sleep(sleep_time):
+#     record()
+#     sleep_time = interval - (time.time() % interval)
