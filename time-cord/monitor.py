@@ -50,7 +50,7 @@ class Monitor():
         Code adapted from: Albert's answer (https://stackoverflow.com/questions/5292204/macosx-get-foremost-window-title)
             and RobC's answer (https://stackoverflow.com/questions/51775132/how-to-get-return-value-from-applescript-in-python)
 
-        Returns:
+        Outputs:
           str: "name, title"
         """
 
@@ -82,7 +82,7 @@ class Monitor():
         """
         Determine if Discord is open in the top window, and return current channel name if so.
 
-        Returns:
+        Outputs:
           str: channel_name if Discord is open, else None
         """
 
