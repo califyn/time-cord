@@ -51,6 +51,6 @@ In Mac OS, ``scheduling.py`` adds ``run.py`` to a [launchd](https://www.launchd.
 [current time since the epoch],[channel name / NONE if Discord isn't open],[server name / NONE if Discord isn't open]
 ```
 
-### What's next for time-cord?
+### ``insights.py``
 
-As of this point in development, the focus is on writing new functions that allow a user to gain insights into the logged Discord data.
+Provides the ``TCInsights`` class, which has three functions to analyze logged data: ``sprawl_data()`` (provides a breakdown of time spent), ``detail_data()`` (provides detailed data about use of one channel/server/Discord; log form), ``log_data()`` (covers all channels/servers/Discord in a log form). ``TCInsights`` loads data upon initialization and only updates data if ``update()`` is called.

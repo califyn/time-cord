@@ -1,14 +1,11 @@
 # Quantify & take control of time spent on Discord
 ## About timecord
 
-timecord is a library-in-development that seeks to:
-- Track time spent on Discord
-- Track time spent on specific servers & channels
-- Close Discord after too much time is spent
-...without violating Discord ToS!
+time-cord is a library that:
+- Tracks time spent on Discord
+- Tracks time spent on specific servers & channels
 
-The library is in early development.  Completed features include:
-- Functions to determine _current_ server/channel name.
+Currently only Mac OS is supported.
 
 #### Areas for improvement:
 - Support for non-Mac OS devices
