@@ -18,6 +18,15 @@ interval = 30
 # every N seconds, execute something
 
 def rec_write(line, path="records.log"): # TODO: quicker file reading/writing
+    """
+    Writes a line of text to the specified records file.
+    
+    Inputs:
+        line: the line of text to be written.
+        path: the relative path to the records file.  Defaults to the normal
+            location of the records file.
+    """
+ 
     lines = []
     try:
         with open(parpath + path, "r") as file:
@@ -36,6 +45,11 @@ def rec_write(line, path="records.log"): # TODO: quicker file reading/writing
         print(e)
         
 def record():
+    """
+    Takes a snapshot using the Monitor instance and writes it to
+    the logging file.
+    """
+    
     try:
         line = str(time.time())
         chnl = mon.channel_name()
@@ -48,17 +62,6 @@ def record():
         rec_write(line)
     except Exception as e:
         print(e)
-    """
-    Assigns value of time to variable line, if chnl is not None adds server name to line.
-    Runs rec_write(line), if failed prints e.
-
-    Inputs:
-        Takes no inputs.
-
-    Outputs:
-        Exception: if rec_write(line) fails e is printed.
-    """
-
 
 # TODO: make sure not too many threads are running at once (interval too low)
 # TODO: replace commas
