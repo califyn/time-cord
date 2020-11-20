@@ -34,7 +34,7 @@ def rec_write(line, path="records.log"): # TODO: quicker file reading/writing
                 file.write(l)
     except Exception as e:
         print(e)
-
+        
 def record():
     try:
         line = str(time.time())
@@ -48,6 +48,17 @@ def record():
         rec_write(line)
     except Exception as e:
         print(e)
+    """
+    Assigns value of time to variable line, if chnl is not None adds server name to line.
+    Runs rec_write(line), if failed prints e.
+
+    Inputs:
+        Takes no inputs.
+
+    Outputs:
+        Exception: if rec_write(line) fails e is printed.
+    """
+
 
 # TODO: make sure not too many threads are running at once (interval too low)
 # TODO: replace commas
